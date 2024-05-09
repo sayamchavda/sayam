@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .error{
+             color:red;
+         }
+    </style>
+</head>
+<body>
+    <h2>register form</h2>
+    <form id="registerform">
+        <label for="username">username</label><br>
+        <input type="text" name="username" id= "username"><br>
+        <span id="usernameerror" class="error"></span><br>
+
+        <label for="email">email</label><br>
+        <input type="email" name="email" id="email" ><br>
+        <span id="emailerror" class="error"></span><br>
+
+        <label for="password">password</label><br>
+        <input type="password" name="password" id="password" ><br>
+        <span id="passworderror" class="error"></span><br>
+
+        <input type="submit" value="register">
+    </form>
+    <script>
+
+        document.getElementById('registerform').addEventListener('submit', function(event){
+            event.preventDefault();
+
+            document.getElementById("usernameerror").textContent="";
+            document.getElementById("emailerror").textContent="";
+            document.getElementById("passworderror").textContent="";
+
+            var username=document.getElementById("username").value;
+            var email=document.getElementById("email").value;
+            var password=document.getElementById("password").value;
+
+            var isvalid=true;
+
+            if(username.trim()==='')
+            {
+                document.getElementById('usernameerror').textContent='username is required';
+                isvalid=false;
+            }
+
+            if(email.trim()==='')
+            {
+                document.getElementById('emailerror').textContent='email is required';
+                isvalid=false;
+            }
+            else if(!validateemail(email))
+            {
+                document.getElementById('emailerror').textContent='invalid email';
+                isvalid=false;
+            }
+            
+            if(password.trim()==='')
+            {
+                document.getElementById('passworderror').textContent='password is required';
+                isvalid=false;
+            }
+            if(isvalid)
+            {
+                this.submit();
+            }
+        });
+        function validateemail(email)
+        {
+            var re=/\S+@\S+\.\S+/;
+            return re.test(email);
+        }
+
+    </script>
+</body>
+</html>
